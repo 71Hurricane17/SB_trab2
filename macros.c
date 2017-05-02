@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 int ifmacro(int a);
+int whilemacro(int a);
 
 int main(int argc, char const *argv[]){
 
@@ -8,8 +9,12 @@ int main(int argc, char const *argv[]){
 	int b = 2;
 	int c = 3;
 	
-	int retorno = ifmacro(ifmacro(a>b)>c);
-	printf("%d\n",retorno);
+	int retornofinal = ifmacro(a<b) && ifmacro(a<c);
+	printf("%d\n",retornofinal);
+
+	int y = whilemacro(1);
+
+	printf("%d\n",y);
 
 	return 0;
 }

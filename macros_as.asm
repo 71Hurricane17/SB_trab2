@@ -25,7 +25,18 @@
 	%endif
 %endmacro
 
+%macro while 0
+	%push while
+	%$begin:
+%endmacro
+
+%macro endwhile 1
+	j%-1 %$begin
+	%pop
+%endmacro
+
 global _ifmacro
+global _whilemacro
 
 	section .data
 
@@ -39,6 +50,17 @@ _ifmacro:
 	else
 		ret
 	endif
+
+_whilemacro:
+	mov ebx,[esp+4]
+	mov eax,0
+	while
+		dec ebx
+		inc eax
+		cmp ebx,0
+	endwhile z
+	ret
+
 
 
 ; global start
