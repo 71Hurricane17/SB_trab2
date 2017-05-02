@@ -1,6 +1,6 @@
-%macro if 1 ; Macro if recebe 1 argumento
+%macro if 1 ; Macro if recebe 1 argumento de condition code
 	%push if ; Push no contexto
-	j%-1 %$ifnot ; Se for zero, vai para o ifnot
+	j%-1 %$ifnot ; Se condition code não for satisfeito, vai para o ifnot
 %endmacro
 
 %macro else 0 ; Macro else, nao recebe argumentos
@@ -32,7 +32,7 @@
 
 %macro enddowhile 1 ; Finalizar o do-while
 	j%-1 %$begin ; Se for diferente de zero, voltar para o inicio do laco
-	%pop ; Se for zero, retirar o contexto
+	%pop ; Se condition code não for satisfeito, retirar o contexto
 %endmacro
 
 %macro for 1
