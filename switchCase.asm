@@ -16,30 +16,34 @@
     cmp var %1
     jne %$case%+caseCont ;Se var for diferente do parâmetro passado, salta para próximo case
   %elifctx default    ; Se estiver no contexto default
-    error "Não coloque um default antes de um case"
+    %error "Não coloque um default antes de um case"
   %else               ; Se não existir contexto switch ou case anteriormente
-    error "Esperado um switch ou case anteriormente"
+    %error "Esperado um switch ou case anteriormente"
   %end
 %endmacro
 
 %macro break
-  %elifctx case
+  %ifctx case
     jmp %$switchEnd   ; Salta para fim do switch
   %elifctx default
     jmp %$switchEnd   ; Salta para fim do switch
+  %elifctx switch
+    %error "Não coloque break antes de um case"
   %else
-    error "Esperado um case ou default antes do break"
+    %error "Esperado um case ou default antes do break"
   %end
 %endmacro
 
 %macro default
   %ifctx switch
-    error "Esperado ao menos um case antes do default"
+    %error "Esperado ao menos um case antes do default"
   %elifctx case
+    %$case%+caseCont: ; Cria label do default 
     %repl default     ; Renomeia contexto para default
-    
+  %elifctx default
+    %error "Coloque apenas um default"
   %else
-    
+    error "Default precisa estar dentro de um switch"
   %end
 %endmacro
 
@@ -53,7 +57,7 @@
     %$switchEnd:      ; Cria label switchEnd
     %pop;             ; remove contexto da macro
   %else
-    
+    error "Esperado abertura de um switch antes de fechá-lo"
   %end
 %endmacro
 
