@@ -1,5 +1,6 @@
 /**							    LINEAR FEEDBACK SHIFT REGISTER (LFSR)
 *	Estudantes: Arthur Jaber Costato (13/0039993)
+*				Murilo Cerqueira Medeiros (12/0130637)
 *				
 *				
 *				
