@@ -25,8 +25,20 @@
 	%endif
 %endmacro
 
+%macro whiledo 1 ;While-do com 1 parametro
+	%push whiledo ; Colocar o contexto do While-do
+	%$begin:
+	j%-1 %$fimwhile ; Se a condicao não for atendida, finalizar o while
+%endmacro
+
+%macro endwhiledo 0
+	jmp %$begin
+	%$fimwhile:
+	%pop ; Retirar o whiledo do contexto
+%endmacro
+
 %macro dowhile 0 ; Do-while sem parametros
-	%push dowhile ; Colocar o contexto do-while
+	%push dowhile ; Colocar o contexto do do-while
 	%$begin: ; Iniciar o conteúdo do do-while
 %endmacro
 
@@ -48,6 +60,7 @@
 %endmacro
 
 global _ifmacro
+global _whiledomacro
 global _dowhilemacro
 global _formacro
 
@@ -63,6 +76,16 @@ _ifmacro:
 	else
 		ret ; Retornar se não for zero
 	endif
+
+_whiledomacro:
+	mov eax,0 ; Colocar a contagem em eax, para retornar
+	mov ebx,[esp+4] ; Colocar o numero de vezes em ebx
+	test ebx,ebx ; Verificar se o numero de vezes eh zero, para setar a flag ZF e a condição do laco ser falsa
+	whiledo nz
+		inc eax ; Incrementar a contagem
+		dec ebx ; Decrementar o número de vezes
+	endwhiledo
+	ret
 
 _dowhilemacro:
 	mov ebx,[esp+4] ; Colocar o parametro em ebx
