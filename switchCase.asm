@@ -59,7 +59,7 @@
 
 %macro switchEnd
   %ifctx switch
-    %error "Coloque case's e se quiser default dentro do switch"
+    %error "Coloque cases e se quiser default dentro do switch"
   %elifctx case
     %$switchEnd:      ; Cria label switchEnd
     %pop;             ; remove contexto da macro
