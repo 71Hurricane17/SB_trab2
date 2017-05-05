@@ -15,11 +15,12 @@
 
 /**
 *	Função para simular a execução do comando if.
-*	Parâmetro: Número inteiro representando o valor que deve ser avaliado.
-*	Retorno: A função retorna um valor diferente de zero (ou seja, true) se o parâmetro enviado for diferente de 0, e 0 (ou seja, false) se o parâmetro for igual a 0.
-*
+*	Parâmetro:	a - Primeiro número que será comparado. 
+*				b - Segundo número que será comparado. 
+*				c - Terceiro número que será comparado. 
+*	Retorno: A função retorna o maior número.
 **/
-int ifmacro(int a);
+int ifmacro(int a,int b,int c);
 
 /**
 *	Função para simular a execução do comando while.
@@ -47,24 +48,33 @@ int dowhilemacro(int a);
 **/
 int formacro(int a,int b,int c);
 
+/**
+*	Função para simular a execução do comando switch.
+*	Parâmetro:	a - Número inteiro representando o valor que será analisado.
+*	Retorno: A função retorna 1, se o número tiver o valor de 1 ou 2, e 0, caso contrário.
+**/
+// int switchmacro(int a);
+
 int main(int argc, char const *argv[]){
 	
 	int a = 1;
 	int b = 2;
 	int c = 3;
 	
-	int retornofinal = ifmacro(a<b) && ifmacro(a<c);
-	printf("A<B && A<C: %d\n",retornofinal);
+	int retornoif = ifmacro(a,b,c);
+	printf("O maior número é %d.\n",retornoif);
 
-	int y = dowhilemacro(0);
-
-	printf("Entrou no do-while: %d vezes.\n",y);
+	int retornodowhile = dowhilemacro(0);
+	printf("Entrou no do-while: %d vezes.\n",retornodowhile);
 
 	int retornofor = formacro(0,3,1);
 	printf("Entrou no for: %d vezes\n",retornofor);
 
-	int retornowhile = whiledomacro(5);
-	printf("Entrou no while-do %d vezes.\n",retornowhile);
+	int retornowhiledo = whiledomacro(5);
+	printf("Entrou no while-do %d vezes.\n",retornowhiledo);
+
+	/*int retornoswitch = switchmacro(1);
+	printf("O retorno do switch foi %d.\n",retornoswitch);*/
 
 	return 0;
 }

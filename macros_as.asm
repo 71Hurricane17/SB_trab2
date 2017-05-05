@@ -93,7 +93,7 @@
   %$caseIn%caseCont:
 %endmacro
 
-%macro break
+%macro break 0
   %ifctx case
     jmp %$switchEnd   ; Salta para fim do switch
   %elifctx default
@@ -105,7 +105,7 @@
   %end
 %endmacro
 
-%macro default
+%macro default 0
   %ifctx switch
     %error "Esperado ao menos um case antes do default"
   %elifctx case
@@ -118,7 +118,7 @@
   %end
 %endmacro
 
-%macro switchEnd
+%macro switchEnd 0
   %ifctx switch
     %error "Coloque cases e se quiser default dentro do switch"
   %elifctx case
@@ -136,19 +136,35 @@ global _ifmacro
 global _whiledomacro
 global _dowhilemacro
 global _formacro
+global _switchmacro
 
 	section .data
 
 	section .text
 
 _ifmacro:
-	mov eax, [esp+4] ; Colocar o parametro em eax
-	cmp eax,0 ; Comparar o parametro com zero
-	if z
-		ret ; Retornar se for zero
+	mov eax, [esp+4] ; Colocar o primeiro numero em eax
+	mov ebx,[esp+8] ; Colocar o segundo numero em ebx
+	mov ecx,[esp+12] ; Colocar o terceiro numero em ecx
+
+	cmp eax,ebx ; Comparar os 2 primeiros parametros
+	if ae ; Se EAX for maior ou igual
+		cmp eax,ecx
+		if ae ; Se EAX for maior ou igual
+			; EAX já está em EAX, então não faz nada
+		else ; Se EAX eh maior que EBX e menor que ECX, ECX é o maior
+			mov eax,ecx ; ECX é o maior
+		endif
 	else
-		ret ; Retornar se não for zero
+		cmp ebx,ecx
+		if ae
+			mov eax,ebx ; EBX é o maior
+		else
+			mov eax,ecx ; ECX é o maior
+		endif
 	endif
+
+	ret
 
 _whiledomacro:
 	mov eax,0 ; Colocar a contagem em eax, para retornar
@@ -187,4 +203,19 @@ _formacro:
 		cmp eax,ebx
 	endfor
 	ret
+
+; _switchmacro:
+; 	mov ebx,[esp+4]
+; 	switch ebx
+; 		case 1
+; 			mov eax,1
+; 		break
+; 		case 2
+; 			mov eax,1
+; 		break
+; 		default
+; 			mov eax,0
+; 		break
+; 	switchEnd
+; 	ret
 
