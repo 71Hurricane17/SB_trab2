@@ -1,7 +1,7 @@
 %macro switch 1       ; Cria macro switch
   %push switch        ; Cria contexto switch
-  %assign var %1      ; Salva em uma "variável da macro" do contexto (var) o parâmetro passado (%1)
-  %assign caseCont 0  ; Cria contador de cases
+  %assign %$var %1    ; Salva em uma "variável da macro" do contexto (var) o parâmetro passado (%1)
+  %assign %$caseCont 0; Cria contador de cases
   [SECTION .data]     ; Altera para a seção de .data
     %$caseIn db 0     ; Cria uma flag caseIn recebendo 0
   __SECT__            ; Retorna para a seção corrente
@@ -10,26 +10,26 @@
 %macro case 1         ; Cria macro case
   %ifctx switch       ; Se estiver no contexto switch
     %repl case        ; Renomeia contexto para case
-    %assign caseCont caseCont+1 ; Incrementa contador de cases
+    %assign %$caseCont %$caseCont+1 ; Incrementa contador de cases
     cmp %$caseIn 0    ; Se tiver entrado em um case e não ter dado um break
-    jne %$caseIn%caseCont 
-    cmp var %1
-    jne %$case%caseCont ;Se var for diferente do parâmetro passado (%1), salta para próximo case
+    jne %$caseIn%$caseCont 
+    cmp %$var %1
+    jne %$case%$caseCont ;Se var for diferente do parâmetro passado (%1), salta para próximo case
     mov %$caseIn 1    ; Entrou em um case, então seta flag caseIn para 1
   %elifctx case       ; Se estiver no contexto case
-    %$case%caseCont: ; Cria label do case 
-    %assign caseCont caseCont+1 ; Incrementa contador de cases
+    %$case%$caseCont: ; Cria label do case 
+    %assign %$caseCont %$caseCont+1 ; Incrementa contador de cases
     cmp %$caseIn 0    ; Se tiver entrado em um case e não ter dado um break
-    jne %$caseIn%caseCont 
-    cmp var %1
-    jne %$case%caseCont ;Se var for diferente do parâmetro passado, salta para próximo case
+    jne %$caseIn%$caseCont 
+    cmp %$var %1
+    jne %$case%$caseCont ;Se var for diferente do parâmetro passado, salta para próximo case
     mov %$caseIn 1    ; Entrou em um case, então seta flag caseIn para 1
   %elifctx default    ; Se estiver no contexto default
     %error "Não coloque um default antes de um case"
   %else               ; Se não existir contexto switch ou case anteriormente
     %error "Esperado um switch ou case anteriormente"
   %end
-  %$caseIn%caseCont:
+  %$caseIn%$caseCont:
 %endmacro
 
 %macro break
@@ -48,7 +48,7 @@
   %ifctx switch
     %error "Esperado ao menos um case antes do default"
   %elifctx case
-    %$case%caseCont: ; Cria label do default 
+    %$case%$caseCont: ; Cria label do default 
     %repl default     ; Renomeia contexto para default
   %elifctx default
     %error "Coloque apenas um default"
