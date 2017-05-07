@@ -93,7 +93,7 @@
   %$caseIn%$caseCont:
 %endmacro
 
-%macro break
+%macro break 0
   %ifctx case
     jmp %$switchEnd   ; Salta para fim do switch
   %elifctx default
@@ -105,7 +105,7 @@
   %end
 %endmacro
 
-%macro default
+%macro default 0
   %ifctx switch
     %error "Esperado ao menos um case antes do default"
   %elifctx case
@@ -118,7 +118,7 @@
   %end
 %endmacro
 
-%macro switchEnd
+%macro switchEnd 0
   %ifctx switch
     %error "Coloque cases e se quiser default dentro do switch"
   %elifctx case
