@@ -56,16 +56,16 @@
 	%pop ; Se condition code não for satisfeito, retirar o contexto
 %endmacro
 
-%macro for 1
-	%push for
-	j%-1 %$fimfor
-	%$begin:
+%macro for 1 ; For com um parâmetro
+	%push for ; Colocar o contexto do for
+	j%-1 %$fimfor ; Se a condição não for atendida, ir para o fim do laço
+	%$begin: ; Se a condição for atendida, iniciar o laço
 %endmacro
 
 %macro endfor 0
-	jnz %$begin
-	%$fimfor:
-	%pop
+	jnz %$begin ; Ir para o início do laço
+	%$fimfor: ; Finalizar o for
+	%pop ; Retirar o contexto do for
 %endmacro
 
 %macro switch 1       ; Cria macro switch
@@ -197,19 +197,25 @@ _dowhilemacro:
 	ret
 
 _formacro:
+	; Colocar os parâmetros em eax, ebx e ecx
 	mov eax,[esp+4]
 	mov ebx,[esp+8]
 	mov ecx,[esp+12]
 
+	; Comparar o valor inicial com o valor que ele deve atingir
 	cmp eax,ebx
 	for nz
+		; Verificar se é um incremento ou decremento
 		cmp ecx,0
 		jz decrementar
 		jnz incrementar
+		; Incrementar o valor
 		incrementar: inc eax
 		jmp continuar
+		; Decrementar o valor
 		decrementar: dec eax
 		continuar:
+		; Comparar o valor com o valor que ele deve atingir
 		cmp eax,ebx
 	endfor
 	ret
