@@ -19,7 +19,7 @@
 *	Definiu-se MACROS para inicializar vetores, para classificar números em uma das 64 Classes e para calcular o LFSR:
 *		INIV: inicializa um vetor (vet) com um valor (val) até uma dada posição (limite);
 *		CLASSIFICA: Classifica um número gerado (num) em uma das classes (var);
-*		geraNumLFSR: Ao invés de criar uma função, criou-se uma macro para calcular o LFSR
+*		geraNumLFSR: Ao invés de criar uma função, criou-se uma macro para calcular o LFSR 
 **/
 
 #include <stdio.h>
