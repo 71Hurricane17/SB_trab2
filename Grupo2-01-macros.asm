@@ -61,8 +61,8 @@
 
 %macro switch 1       ; Cria macro switch
   %push switch        ; Cria contexto switch
-  %assign var %1      ; Salva em uma "variável da macro" do contexto (var) o parâmetro passado (%1)
-  %assign caseCont 0  ; Cria contador de cases
+  %$assign var %1      ; Salva em uma "variável da macro" do contexto (var) o parâmetro passado (%1)
+  %$assign caseCont 0  ; Cria contador de cases
   [SECTION .data]     ; Altera para a seção de .data
     %$caseIn db 0     ; Cria uma flag caseIn recebendo 0
   __SECT__            ; Retorna para a seção corrente
@@ -71,7 +71,7 @@
 %macro case 1         ; Cria macro case
   %ifctx switch       ; Se estiver no contexto switch
     %repl case        ; Renomeia contexto para case
-    %assign caseCont caseCont+1 ; Incrementa contador de cases
+    %$assign caseCont caseCont+1 ; Incrementa contador de cases
     cmp %$caseIn 0    ; Se tiver entrado em um case e não ter dado um break
     jne %$caseIn%caseCont 
     cmp var %1
@@ -79,7 +79,7 @@
     mov %$caseIn 1    ; Entrou em um case, então seta flag caseIn para 1
   %elifctx case       ; Se estiver no contexto case
     %$case%caseCont: ; Cria label do case 
-    %assign caseCont caseCont+1 ; Incrementa contador de cases
+    %$assign caseCont caseCont+1 ; Incrementa contador de cases
     cmp %$caseIn 0    ; Se tiver entrado em um case e não ter dado um break
     jne %$caseIn%caseCont 
     cmp var %1
