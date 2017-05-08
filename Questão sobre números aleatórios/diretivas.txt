@@ -1,0 +1,9 @@
+Diretivas de compilação para código NASM: LFSR para geração de números pseudorandômicos
+
+nasm -f elf64 -l lfsr.lst lfsr.asm
+gcc -m64 -o lfsr lfsr.o
+
+para executar (Linux):
+
+./lfsr
+
