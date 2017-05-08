@@ -1,10 +1,9 @@
-/**							    LINEAR FEEDBACK SHIFT REGISTER (LFSR)
-*	Estudantes: Arthur Jaber Costato (13/0039993)
-*				Murilo Cerqueira Medeiros (12/0130637)
-*				
-*				
-*				
-*				
+/**	Questão II - LINEAR FEEDBACK SHIFT REGISTER (LFSR)
+*	Estudantes: Arthur Jaber Costato - 13/0039993
+*				Gabriel Fritz Sluzala - 13/0111236
+*				Lucas Gomes Almeida - 12/0152860
+*				Murilo Cerqueira Medeiros - 12/0130637
+*				Thiago Penha Torreão - 10/0125441						
 *
 *	Este programa realizará o cálculo de números aleatórios utilizando o método de Fibonacci LFSR.
 *	Este programa gerará 2^24 números de 24 bits por meio de um número (seed) escolhido arbitrariamente.

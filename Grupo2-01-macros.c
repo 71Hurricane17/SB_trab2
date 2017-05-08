@@ -1,11 +1,10 @@
 /** Questão I - Macros NASM
-*	Estudantes: Arthur Jaber Costato (13/0039993)
-*				Murilo Cerqueira Medeiros (12/0130637)
-*				
-*				
-*				
-*				
-*
+*	Estudantes: Arthur Jaber Costato - 13/0039993
+*				Gabriel Fritz Sluzala - 13/0111236
+*				Lucas Gomes Almeida - 12/0152860
+*				Murilo Cerqueira Medeiros - 12/0130637
+*				Thiago Penha Torreão - 10/0125441		
+
 *	Este programa realiza a chamada de funções em NASM que simulam a execução de comandos do C.
 *	Os parâmetros estão descritos em cada função.
 *

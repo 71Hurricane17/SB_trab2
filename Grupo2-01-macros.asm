@@ -1,3 +1,12 @@
+; Questão I - Macros NASM
+;	Estudantes: Arthur Jaber Costato - 13/0039993
+;				Gabriel Fritz Sluzala - 13/0111236
+;				Lucas Gomes Almeida - 12/0152860
+;				Murilo Cerqueira Medeiros - 12/0130637
+;				Thiago Penha Torreão - 10/0125441			
+;
+;	Este programa realiza a simulação de comandos em C através de macros.
+
 %macro if 1 ; Macro if recebe 1 argumento de condition code
 	%push if ; Push no contexto
 	j%-1 %$ifnot ; Se condition code não for satisfeito, vai para o ifnot
