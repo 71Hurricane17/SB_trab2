@@ -1,3 +1,10 @@
+; Questão II - LFSR
+;   Estudantes: Arthur Jaber Costato - 13/0039993
+;               Gabriel Fritz Sluzala - 13/0111236
+;               Lucas Gomes Almeida - 12/0152860
+;               Murilo Cerqueira Medeiros - 12/0130637
+;               Thiago Penha Torreão - 10/0125441  
+
 global main
     extern printf ;função de C para imprimir na tela
 
