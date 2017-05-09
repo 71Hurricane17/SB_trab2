@@ -74,6 +74,7 @@
   %assign %$caseCont 0; Cria contador de cases
   [SECTION .data]     ; Altera para a seção de .data
     %$caseIn db 0     ; Cria uma flag caseIn recebendo 0
+    ; %$var dw 0        ; Cria uma variável var recebendo 0
   __SECT__            ; Retorna para a seção corrente
 %endmacro
 

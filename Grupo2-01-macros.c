@@ -72,8 +72,8 @@ int main(int argc, char const *argv[]){
 	int retornowhiledo = whiledomacro(5);
 	printf("Entrou no while-do %d vezes.\n",retornowhiledo);
 
-	/*int retornoswitch = switchmacro(1);
-	printf("O retorno do switch foi %d.\n",retornoswitch);*/
+	// int retornoswitch = switchmacro(1);
+	// printf("O retorno do switch foi %d.\n",retornoswitch);
 
 	return 0;
 }
